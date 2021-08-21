@@ -1,24 +1,16 @@
-import React, { Component } from 'react'
-import BookItem from './BookItem';
+import React from 'react'
 import PropTypes from 'prop-types'
+import ListBookItem from './ListBookItem';
 const Shelves = props => {
 
+    const {shelfName,books,handleChangeEvent}=props
 
     return (
         <div className="bookshelf">
-            <h2 className="bookshelf-title">  {props.shelfName}  </h2>
+            <h2 className="bookshelf-title">  {shelfName}  </h2>
             <div className="bookshelf-books">
 
-                <ul className="books-grid">
-                    {props.books.map( book => (
-
-                        <li key={book.id}>
-
-                            <BookItem book={book} handleChangeEvent={props.handleChangeEvent} />
-                        </li>
-
-                    ))}
-                </ul>
+               <ListBookItem books={books}  handleChangeEvent={handleChangeEvent}/>
 
             </div>
         </div>
