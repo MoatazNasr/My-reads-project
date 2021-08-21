@@ -1,37 +1,36 @@
-import React from 'react'
-import * as BooksAPI from '../../BooksAPI'
+import React, { Component } from 'react'
 import '../../App.css'
 import PropTypes from 'prop-types'
+import Shelves from './Shelves'
 
-class MainPage extends React.Component {
+class MainPage extends Component {
+
 
   static propTypes = {
     books: PropTypes.array.isRequired,
+    updateBooks: PropTypes.func.isRequired,
+
   }
 
   constructor(props) {
 
-    super(props);
+    super(props)
 
   }
 
+  handleChangeEvent = (book, event) => {
 
-  handleChangeEvent = (book,event) => {
+    const newShelf = event.target.value;
 
-    const shelf = event.target.value;
-
-    this.props.updateBookState(book,shelf);
+    this.props.updateBooks(book, newShelf);
 
   }
+
 
   render() {
 
     const { books } = this.props;
-    console.log(books);
-    const currentlyReadingShelf = books.filter((book) => book.shelf === "currentlyReading");
-    const ReadingShelf = books.filter((book) => book.shelf === "read");
-    const wantToReadShelf = books.filter((book) => book.shelf === "wantToRead");
-  
+
 
     return (
 
@@ -43,121 +42,12 @@ class MainPage extends React.Component {
           </div>
           <div className="list-books-content">
 
-            <div>
-              <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
-                <div className="bookshelf-books">
+            <Shelves books={books.filter((book) => book.shelf === "currentlyReading")} handleChangeEvent={this.handleChangeEvent} shelfName='CurrentlyReading' />
+            <Shelves books={books.filter((book) => book.shelf === "wantToRead")} handleChangeEvent={this.handleChangeEvent} shelfName='WantToRead' />
+            <Shelves books={books.filter((book) => book.shelf === "read")} handleChangeEvent={this.handleChangeEvent} shelfName='Read' />
 
-                  <ul className="books-grid">
-
-                    {currentlyReadingShelf.map(book => (
-
-                      <li key={book.id}>
-
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-                            <div className="book-shelf-changer">
-                              <select onChange={ event => this.handleChangeEvent( book,event) }>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option selected value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors"> {book.authors.map((author, i) => (
-
-                            <p key={i}>{author}</p>))}
-
-                          </div>
-                        </div>
-                      </li>
-
-                    ))}
-                  </ul>
-
-                </div>
-              </div>
-              <div className="bookshelf">
-                <h2 className="bookshelf-title">Want to Read</h2>
-                <div className="bookshelf-books">
-
-
-                  <ul className="books-grid">
-
-                    {wantToReadShelf.map(book => (
-
-                      <li key={book.id}>
-
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-                            <div className="book-shelf-changer">
-                              <select  onChange={ event => this.handleChangeEvent(book,event) }>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option selected value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors"> {book.authors.map((author, i) => (
-
-                            <p key={i}>{author}</p>))}
-
-                          </div>
-                        </div>
-                      </li>
-
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="bookshelf">
-                <h2 className="bookshelf-title">Read</h2>
-                <div className="bookshelf-books">
-
-                  <ul className="books-grid">
-
-                    {ReadingShelf.map(book => (
-
-                      <li key={book.id}>
-
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-                            <div className="book-shelf-changer">
-                              <select onChange={ event => this.handleChangeEvent(book,event) }>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option selected value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors"> {book.authors.map((author, i) => (
-
-                            <p key={i}>{author}</p>))}
-
-                          </div>
-                        </div>
-                      </li>
-
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
           </div>
-
-
+          
           <div className="open-search">
             <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
           </div>
@@ -170,6 +60,5 @@ class MainPage extends React.Component {
   }
 
 }
-
 
 export default MainPage;
