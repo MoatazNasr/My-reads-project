@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../../App.css'
 import PropTypes from 'prop-types'
 import Shelves from './Shelves'
+import { Link } from 'react-router-dom'
 
 class MainPage extends Component {
 
@@ -49,8 +50,9 @@ class MainPage extends Component {
           </div>
           
           <div className="open-search">
-            <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+            <Link to="/search" className=".open-search"/>
           </div>
+
         </div>
 
       </div >
