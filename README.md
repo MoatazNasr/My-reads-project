@@ -5,14 +5,32 @@ This is the starter template for the final assessment project for Udacity's Reac
 
 ## Getting Starteed
 
+* You might use npm to start and install dependencies 
+* You might use yarn to start and install dependencies 
+## Installing
 
-To get started developing right away:
+To download the project  on your local machine
 
+```
+git clone https://github.com/MoatazNasr/My-reads-project.git
+cd My-reads-project 
+
+```
+
+To install dependencies and run the project with npm:
+
+```
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
+```
+To install dependencies and run the project with yarn:
 
+```
+* install all project dependencies with `yarn install`
+* start the development server with `yarn start`
 
+```
 
 ## Backend Server
 
