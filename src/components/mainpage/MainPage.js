@@ -13,24 +13,11 @@ class MainPage extends Component {
 
   }
 
-  constructor(props) {
-
-    super(props)
-
-  }
-
-  handleChangeEvent = (book, event) => {
-
-    const newShelf = event.target.value;
-
-    this.props.updateBooks(book, newShelf);
-
-  }
-
+ 
 
   render() {
 
-    const { books } = this.props;
+    const { books,updateBooks } = this.props;
 
 
     return (
@@ -43,9 +30,9 @@ class MainPage extends Component {
           </div>
           <div className="list-books-content">
 
-            <Shelves books={books.filter((book) => book.shelf === "currentlyReading")} handleChangeEvent={this.handleChangeEvent} shelfName='CurrentlyReading' />
-            <Shelves books={books.filter((book) => book.shelf === "wantToRead")} handleChangeEvent={this.handleChangeEvent} shelfName='WantToRead' />
-            <Shelves books={books.filter((book) => book.shelf === "read")} handleChangeEvent={this.handleChangeEvent} shelfName='Read' />
+            <Shelves books={books.filter((book) => book.shelf === "currentlyReading")} handleChangeEvent={updateBooks} shelfName='CurrentlyReading' />
+            <Shelves books={books.filter((book) => book.shelf === "wantToRead")} handleChangeEvent={updateBooks} shelfName='WantToRead' />
+            <Shelves books={books.filter((book) => book.shelf === "read")} handleChangeEvent={updateBooks} shelfName='Read' />
 
           </div>
           
