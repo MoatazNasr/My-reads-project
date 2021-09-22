@@ -24,7 +24,7 @@ class BooksApp extends React.Component {
 
     const newShelf = event.target.value;
     
-   const books= await BooksAPI.update(book, newShelf)
+    await BooksAPI.update(book, newShelf)
 
       .then(() => {
 
